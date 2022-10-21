@@ -1,7 +1,9 @@
 package org.example;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -42,12 +44,19 @@ public class Menu {
         }
     }
     public void run (){
-        print();
+
         Scanner scanner = new Scanner(System.in);
+        String  input;
+        int a;
         while (!exit){
-            int input = scanner.nextInt();
-            if (input>=1 & input <=items.size()){
-                items.get(input-1).getAction().run();
+            print();
+            input = scanner.nextLine();
+            try{
+            a=Integer.parseInt(input);}
+            catch (NumberFormatException e){continue;}
+
+            if (a>=1 & a <=items.size()){
+                items.get(a-1).getAction().run();
             }
         }
     }
