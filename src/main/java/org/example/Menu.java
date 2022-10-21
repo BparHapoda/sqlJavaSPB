@@ -1,5 +1,6 @@
 package org.example;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,11 +27,11 @@ public class Menu {
     public static Menu getMenu (){
         Menu menu = new Menu();
         menu.name="Главное меню";
-        menu.getItems().add(new MenuPunkt("Вывести базу полностью",()->System.out.println("9")));
-        menu.getItems().add(new MenuPunkt("Внести нового пользователя в базу данных",()->System.out.println("9")));
-        menu.getItems().add(new MenuPunkt("Изменить данные пользователя",()->System.out.println("9")));
-        menu.getItems().add(new MenuPunkt("Найти пользователя по ФИО",()->System.out.println("9")));
-        menu.getItems().add(new MenuPunkt("Найти пользователя по дате рождения",()->System.out.println("9")));
+        menu.getItems().add(new MenuPunkt("Вывести базу полностью",()->baseOutput()));
+        menu.getItems().add(new MenuPunkt("Внести нового пользователя в базу данных",()->System.out.println("2")));
+        menu.getItems().add(new MenuPunkt("Изменить данные пользователя",()->System.out.println("3")));
+        menu.getItems().add(new MenuPunkt("Найти пользователя по ФИО",()->System.out.println("4")));
+        menu.getItems().add(new MenuPunkt("Найти пользователя по дате рождения",()->System.out.println("5")));
         menu.getItems().add(new MenuPunkt("Выход",()-> menu.setExit(true)));
         return menu;
     }
@@ -48,6 +49,14 @@ public class Menu {
             if (input>=1 & input <=items.size()){
                 items.get(input-1).getAction().run();
             }
+        }
+    }
+    public static void baseOutput (){
+        String query = "SELECT * FROM customers";
+        try {
+            DataBaseConnection.selectQuery(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

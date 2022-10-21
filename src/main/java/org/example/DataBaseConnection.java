@@ -43,7 +43,7 @@ public class DataBaseConnection {
             throw new RuntimeException(e);
         }
         String str ;
-
+header();
         while (true) {
             try {
                 if (!rs.next()) break;
