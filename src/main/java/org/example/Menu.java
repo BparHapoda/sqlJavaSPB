@@ -29,7 +29,7 @@ public class Menu {
     public static Menu getMenu (){
         Menu menu = new Menu();
         menu.name="Главное меню";
-        menu.getItems().add(new MenuPunkt("Вывести базу полностью",()->baseOutput()));
+        menu.getItems().add(new MenuPunkt("Вывести базу полностью", Menu::baseOutput));
         menu.getItems().add(new MenuPunkt("Внести нового пользователя в базу данных",()->System.out.println("2")));
         menu.getItems().add(new MenuPunkt("Изменить данные пользователя",()->System.out.println("3")));
         menu.getItems().add(new MenuPunkt("Найти пользователя по ФИО",()->System.out.println("4")));
@@ -67,5 +67,12 @@ public class Menu {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static void insertBase (){
+        Scanner scanner= new Scanner(System.in);
+      System.out.println("Введите ФИО (если отчества нет,напишите - нет:");
+      String fio =scanner.nextLine();
+      System.out.println("Введите дату в формате (YYYY-MM-DD) :");
+      String date = scanner.nextLine();
     }
 }

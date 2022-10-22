@@ -12,11 +12,12 @@ public class Main {
 
 
       //  String query = "SELECT * FROM customers";
-        //  insert("Павел", "Cтепанов", "Борисович", "М", 12, 11, 1985);
+        // insert("Павел", "Cтепанов", "Борисович", "М", 12, 11, 1985);
      //  header();
      //  selectQuery(query);
 Menu menu= Menu.getMenu();
 menu.run();
+
 
     }
 

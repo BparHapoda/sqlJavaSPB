@@ -17,9 +17,9 @@ public class DataBaseConnection {
     }
 
     public static void insert(String name, String surname, String sursurname,
-                              String pol, int day, int month, int year) throws SQLException {
+                              String pol, String date) throws SQLException {
         Connection connection = null;
-        java.sql.Date sqlDate = new java.sql.Date(year-month-day);
+        java.sql.Date sqlDate = java.sql.Date.valueOf(date);
         connection = DataBaseConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement
                 ("INSERT INTO customers (name,surname,sursurname,pol,birthday) VALUES (?, ?, ?, ?,?)");
@@ -30,7 +30,7 @@ public class DataBaseConnection {
         preparedStatement.setObject(5,sqlDate );
         preparedStatement.executeUpdate();
         preparedStatement.close();
-
+connection.close();
 
     }
     public static void selectQuery(String query) throws SQLException {
@@ -53,9 +53,9 @@ header();
             try {
                 System.out.printf("|%-10d|%-20s|%-20s|%-20s|%3s|%12s|",
                         rs.getInt("id"),
+                        rs.getString("surname"),
                         rs.getString("name"),
                         rs.getString("sursurname"),
-                        rs.getString("surname"),
                         " "+rs.getString("pol")+" ",
                         " "+rs.getString("birthday")+" "
                 );
@@ -79,9 +79,9 @@ header();
         footer();
         System.out.printf("|%-10s|%-20s|%-20s|%-20s|%3s|%12s|",
                 "   Номер",
+                "     Фамилия",
                 "         Имя",
                 "      Отчество",
-                "     Фамилия",
                 "Пол",
                 "Дата рожд"
         );
