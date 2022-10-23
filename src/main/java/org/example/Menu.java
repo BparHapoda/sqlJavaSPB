@@ -62,11 +62,8 @@ public class Menu {
     }
     public static void baseOutput (){
         String query = "SELECT * FROM customers";
-        try {
-            System.out.println(DataBaseQuery.selectQuery(query));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        ConsoleOutput consoleOutput = new ConsoleOutput();
+        consoleOutput.print(query);
     }
     public static void insertBase (){
         Scanner scanner= new Scanner(System.in);
