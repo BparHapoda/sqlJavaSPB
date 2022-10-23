@@ -1,5 +1,5 @@
 package org.example;
 
 public interface Output {
-    public void print ();
+    public void printQuery ();
 }

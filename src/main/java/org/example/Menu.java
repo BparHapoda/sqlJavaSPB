@@ -63,7 +63,7 @@ public class Menu {
     public static void baseOutput (){
         String query = "SELECT * FROM customers";
         try {
-            DataBaseConnection.selectQuery(query);
+            System.out.println(DataBaseQuery.selectQuery(query));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
