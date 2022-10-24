@@ -32,7 +32,7 @@ public class DataBaseQuery {
 
     }
     public static String footer (){
-        return "--------------------------------------------------------------------------------------------";
+        return "--------------------------------------------------------------------------------------------"+"\n";
     }
 
     public static String selectQuery(String query) throws SQLException {

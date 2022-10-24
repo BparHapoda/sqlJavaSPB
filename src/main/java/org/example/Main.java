@@ -17,6 +17,7 @@ public class Main {
      //  selectQuery(query);
 Menu menu= Menu.getMenu();
 menu.run();
+        //     new WindowOutput();
 
 
     }
