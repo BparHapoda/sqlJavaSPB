@@ -32,7 +32,7 @@ public class Menu {
         Menu menu = new Menu();
         menu.name = "Главное меню";
         menu.getItems().add(new MenuPunkt("Вывести базу полностью", Menu::baseOutput));
-        menu.getItems().add(new MenuPunkt("Внести нового пользователя в базу данных", () -> System.out.println("2")));
+        menu.getItems().add(new MenuPunkt("Внести нового пользователя в базу данных", () -> insertBase()));
         menu.getItems().add(new MenuPunkt("Изменить данные пользователя", () -> System.out.println("3")));
         menu.getItems().add(new MenuPunkt("Найти пользователя по ФИО", () -> System.out.println("4")));
         menu.getItems().add(new MenuPunkt("Найти пользователя по дате рождения", () -> System.out.println("5")));
@@ -74,12 +74,26 @@ public class Menu {
     }
 
     public static void insertBase() {
+        String fioSplit [];
+        do {
+            String fio = inputText("Введите ФИО ");
+            fioSplit = fio.split(" ");
+        }while (fioSplit.length<3 & fioSplit[1].length()<2);
 
-        String fio = inputText("Введите ФИО ");;
+        String name = fioSplit [1];
+        String surSurname =fioSplit [2];
+        String surname =fioSplit [0];
+        String end = surSurname.substring(surSurname.length()-2,surSurname.length());
+        String pol;
+        if(end.equals("ич")){pol ="М";}
+        else {pol="Ж";}
+        String birthday = inputText("Введите дату в формате (YYYY-MM-DD) :");
 
-        String date = inputText("Введите дату в формате (YYYY-MM-DD) :");
-//String pol = checkPol (fio);
-//DataBaseQuery.insert();
+        try {
+            DataBaseQuery.insert(name,surname,surSurname,pol,birthday);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static String inputText(String text) {
