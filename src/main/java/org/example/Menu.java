@@ -34,7 +34,7 @@ public class Menu {
         menu.getItems().add(new MenuPunkt("Вывести базу полностью", Menu::baseOutput));
         menu.getItems().add(new MenuPunkt("Внести нового пользователя в базу данных", () -> insertBase()));
         menu.getItems().add(new MenuPunkt("Изменить данные пользователя", () -> System.out.println("3")));
-        menu.getItems().add(new MenuPunkt("Найти пользователя по ФИО", () -> System.out.println("4")));
+        menu.getItems().add(new MenuPunkt("Найти пользователя по ФИО", () -> find()));
         menu.getItems().add(new MenuPunkt("Найти пользователя по дате рождения", () -> System.out.println("5")));
         menu.getItems().add(new MenuPunkt("Выход", () -> menu.setExit(true)));
         return menu;
@@ -69,6 +69,13 @@ public class Menu {
 
     public static void baseOutput() {
         String query = "SELECT * FROM customers";
+        ConsoleOutput consoleOutput = new ConsoleOutput();
+        consoleOutput.print(query);
+    }
+
+    public static void find () {
+        String fio = inputText("Введите ФИО пользователя,которого хотите найти : ");
+        String query = "SELECT * FROM customers WHERE name ='"+fio+"'";
         ConsoleOutput consoleOutput = new ConsoleOutput();
         consoleOutput.print(query);
     }
