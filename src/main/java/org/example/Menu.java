@@ -32,10 +32,9 @@ public class Menu {
         Menu menu = new Menu();
         menu.name = "Главное меню";
         menu.getItems().add(new MenuPunkt("Вывести базу полностью", Menu::baseOutput));
-        menu.getItems().add(new MenuPunkt("Внести нового пользователя в базу данных", () -> insertBase()));
-        menu.getItems().add(new MenuPunkt("Изменить данные пользователя", () -> System.out.println("3")));
-        menu.getItems().add(new MenuPunkt("Найти пользователя по ФИО", () -> find()));
-        menu.getItems().add(new MenuPunkt("Найти пользователя по дате рождения", () -> System.out.println("5")));
+        menu.getItems().add(new MenuPunkt("Внести нового пользователя в базу данных", Menu::insertBase));
+        menu.getItems().add(new MenuPunkt("Найти пользователя по ФИО", Menu::find));
+        menu.getItems().add(new MenuPunkt("Найти пользователя по дате рождения", Menu::findBirthDay));
         menu.getItems().add(new MenuPunkt("Выход", () -> menu.setExit(true)));
         return menu;
     }
@@ -79,6 +78,13 @@ public class Menu {
         ConsoleOutput consoleOutput = new ConsoleOutput();
         consoleOutput.print(query);
     }
+    public static void findBirthDay () {
+        String birthday = inputText("Введите дату рождения пользователя,которого хотите найти (YYYY-MM-DD):  ");
+        String query = "SELECT * FROM customers WHERE birthday ='"+birthday+"'";
+        ConsoleOutput consoleOutput = new ConsoleOutput();
+        consoleOutput.print(query);
+    }
+
 
     public static void insertBase() {
         String fioSplit [];
